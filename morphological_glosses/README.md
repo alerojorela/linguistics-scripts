@@ -14,6 +14,14 @@ This program creates glosses from spanish automatically and renders them.
 
 ![1-15](./screenshot.png)
 
+## Use
+
+```bash
+python3 parser.py ./samples/altazor.txt 'Altazor I'
+```
+
+outputs to: `output.json`
+
 ## Syntax
 
 - `POS:lemma` pair

@@ -4,6 +4,7 @@ from loguru import logger
 
 import json
 import re
+import fire
 # nlp
 
 headers = {'content-type': 'application/json'}
@@ -360,7 +361,22 @@ def parse(text, is_object_language=True):
     return sections
 
 
+def run(filename: str, title: str='unnamed'):
+    with open(filename, 'r') as f:
+        text = f.read()
+
+    sections = parse(text)
+    document = {"docs": [
+        {"title": title, "parts": sections}
+    ]}
+    print(json.dumps(document, indent=2))
+    with open('output.json', 'w') as f:
+        f.write(json.dumps(document, indent=2))
+
 if __name__ == '__main__':
+    fire.Fire(run)
+
+    sys.exit(0)
     # text = input('Introduce texto y pulsa <intro>\n')
     text_altazor = """Altazor ¿por qué perdiste tu primera serenidad?
     ¿Qué ángel malo se paró en la puerta de tu sonrisa
