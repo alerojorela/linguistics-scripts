@@ -65,10 +65,10 @@
 <body>
     <main>
         <h1>Gloss viewer <a
-            href='https://github.com/alerojorela/NLP-scripts/blob/main/semantics/probabilistic/relevant_terms_extraction.py'><img class="inline"
+            href='https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses'><img class="inline"
                 src="../../img/pinned-octocat.svg"></a></h1>
         <p>This spanish glosses have been created automatically using a <a
-                href='https://github.com/alerojorela/NLP-scripts/tree/main/API'>python program</a>:</p>
+                href='https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses'>python program</a>:</p>
         <ul>
             <li><a href='https://spacy.io/'>Spacy</a> provides the morphology</li>
             <li>A large language model called <a href='https://huggingface.co/meta-llama/Llama-2-7b-chat-hf'>Llama 2</a>
@@ -110,8 +110,9 @@
         var text_data = undefined;
 
         function parseTexts(docs) {
+            $('#insertion').html();
             $.each(docs, function (index, doc) {
-                $('#insertion').html(`<h2>${doc.title}</h2>`);
+                $('#insertion').append(`<h2>${doc.title}</h2>`);
                 // Creates tables, one per line
                 tfd = createTablesFromData(doc.parts, ['text', 'gloss', 'translation']);
                 $('#insertion').append(tfd);
