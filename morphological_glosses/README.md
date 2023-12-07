@@ -1,5 +1,7 @@
 # Automatic linguistic glosser for spanish
 
+> online: https://alerojorela.neocities.org/morphology/glosses/gloss_viewer
+
 This program creates glosses from spanish automatically and renders them.
 
 - A **python program** uses and manipulates:
