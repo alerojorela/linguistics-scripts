@@ -1,0 +1,142 @@
+/*
+./conlang/lojban/artículo.html
+./conlang/lojban/ejemplo.html
+./conlang/lojban-glosses/linguistic_glosses.html
+./linguistics/intro/flexión_oracional.html
+
+<table class="linguistic_gloss">
+    <tbody>
+        <tr class="text" lang="es">
+            <th></th>
+            <th>habl-aba</th>
+            <th>mucho</th>
+        </tr>
+        <tr class="gloss">
+            <td></td>
+            <td>habl-<span class="versalitas">ipfv.n-pass.ind.pst.1sg</span></td>
+            <td>mucho</td>
+        </tr>
+        <tr class="translation" lang="es">
+            <td>este es autor de un libro</td>
+        </tr>                    
+    </tbody>
+</table>
+
+<table class="linguistic_gloss">
+    <tbody>
+        <tr class="text" lang="lojban">
+            <td>pe&#39;i do melbi</td>
+        </tr>
+        <tr class="gloss">
+            <td>Opino-que tu ser-bello/agradable</td>
+        </tr>
+        <tr class="translation">
+            <td>Pienso que eres bello/agradable</td>
+        </tr>
+    </tbody>
+</table>
+
+
+*:lang(lojban) {
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(185, 89, 0);
+}
+*:lang(lojban) a {
+    border-bottom: 2px solid rgb(185, 89, 0);
+}
+*/
+
+.horizontalOverflowContainer {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+
+/* BORRA 
+*:lang(lojban) {
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(185, 89, 0);
+}
+*:lang(lojban) a {
+    border-bottom: 2px solid rgb(185, 89, 0);
+}
+*/
+
+table.linguistic_gloss tr.text td {
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(185, 89, 0);
+}
+table.linguistic_gloss tr.text a {
+    border-bottom: 2px solid rgb(185, 89, 0);
+}
+
+table.linguistic_gloss {
+    margin: 40px 20px;
+
+    font-size: 90%;
+}
+table.linguistic_gloss .row_gloss {
+    display: flex;
+    flex-flow: wrap row;
+}
+table.linguistic_gloss .row_gloss>.word_gloss {
+    display: block;
+    padding: 0 5px;
+}      
+
+table.linguistic_gloss td {
+    padding: 0 5px;
+    text-align: center;
+    vertical-align: top;
+}
+
+table.linguistic_gloss .versalitas {
+    font-variant: small-caps;
+}
+
+
+
+table.linguistic_gloss *:lang(lojban) {
+    font-family: 'Courier New', Courier, monospace;
+    vertical-align: bottom;
+
+}
+
+
+/*
+		table.linguistic_gloss tr:not(.translation) td {
+			text-align: left;
+
+		}
+*/
+
+table.linguistic_gloss tr.translation {
+    border-top: 1px dotted purple;
+
+    text-align: center;
+    font-style: italic;
+}
+table.linguistic_gloss tr.translation td {
+}
+
+table.linguistic_gloss tr.translation td::before {
+    content: '« ';
+    display: inline;
+    color: #666;
+}
+
+table.linguistic_gloss tr.translation td::after {
+    content: ' »';
+    display: inline;
+    color: #666;
+}
+
+
+.delimiter1 {
+    color: rgb(80, 80, 80);
+}
+
+
+td[contenteditable] {
+    border: 1px dotted red;
+}

@@ -1,0 +1,150 @@
+{
+  "docs": [
+    {
+      "title": "Ejemplos míos",
+      "parts": [
+        {
+          "translation": "",
+          "gloss": "ART:el-F-SG N:casa-F-SG VERB:construido-F-SG ADP:en ART:el-M-SG N:prado-M-SG",
+          "text": "la casa construida en el prado"
+        },
+        {
+          "translation": "",
+          "gloss": "1SG 3MSG FLEX:haber-IND.PRS.1SG V:ver-PRF",
+          "text": "yo lo he visto"
+        },
+        {
+          "translation": "",
+          "gloss": "FLEX:ser-IND.PST.3SG V:ver-PASS-F-SG ADP:con DET:su-3SG N:pareja-F-SG",
+          "text": "fue vista con su pareja"
+        },
+        {
+          "translation": "",
+          "gloss": "FLEX:estar-IND.PRS.1PL V:comer-PROG",
+          "text": "estamos comiendo"
+        },
+        {
+          "translation": "",
+          "gloss": "2SG V:hablar-IND.PRS.2SG",
+          "text": "t\u00fa hablas"
+        },
+        {
+          "translation": "",
+          "gloss": "3MSG V:cantar-IND.FUT.3SG",
+          "text": "\u00e9l cantar\u00e1"
+        },
+        {
+          "translation": "",
+          "gloss": "FLEX:ir-IND.PST.1PL ADP:a V:comer",
+          "text": "fuimos a comer"
+        },
+        {
+          "translation": "",
+          "gloss": "SCONJ:si V:ir-SBJV.PRS.2SG ADV:ma\u00f1ana",
+          "text": "si fueras ma\u00f1ana"
+        },
+        {
+          "translation": "",
+          "gloss": "V:comer-IND.PST.1PL",
+          "text": "com\u00edamos"
+        },
+        {
+          "translation": "",
+          "gloss": "PUNCT:\u00a1 V:cantar-IMP.2SG ADV:ya PUNCT:!",
+          "text": "\u00a1 canta ya !"
+        },
+        {
+          "translation": "",
+          "gloss": "DEM:este-F-PL N:casa-F-PL ADV:no FLEX:estar-IND.PRS.3PL ADV:menos ADJ:invendible-PL SCONJ:que DEM:aquel-F-PL",
+          "text": "Estas casas no est\u00e1n menos invendibles que aquellas"
+        },
+        {
+          "translation": "",
+          "gloss": "DEM:aquel-F-PL N:casa-F-PL ADV:no FLEX:estar-IND.PRS.3PL ADV:menos ADJ:invendible-PL SCONJ:que DEM:este-F-PL",
+          "text": "Aquellas casas no est\u00e1n menos invendibles que estas"
+        },
+        {
+          "translation": "",
+          "gloss": "ART:el-F-SG ADJ:innombrable-SG",
+          "text": "la innombrable"
+        },
+        {
+          "translation": "",
+          "gloss": "V:comer-IND.PST.1PL",
+          "text": "comimos"
+        }
+      ]
+    },
+    
+    {
+      "title": "Altazor I",
+      "parts": [
+        {
+          "text": "Altazor \u00bf por qu\u00e9 perdiste tu primera serenidad ?",
+          "gloss": "PROPN:Altazor PUNCT:\u00bf ADP:por PRON:qu\u00e9-SG V:perder-IND.PST.2SG POSS:2SG-SG ADJ:primero-F-SG N:serenidad-F-SG PUNCT:?",
+          "translation": "Altazor, why did you lose your first serenity?"
+        },
+        {
+          "text": "\u00bf Qu\u00e9 \u00e1ngel malo se par\u00f3 en la puerta de tu sonrisa",
+          "gloss": "PUNCT:\u00bf DET:qu\u00e9 N:\u00e1ngel-M-SG ADJ:malo-M-SG PRON:3 V:parar-IND.PST.3SG ADP:en ART:el-F-SG N:puerta-F-SG ADP:de POSS:2SG-SG N:sonrisa-F-SG",
+          "translation": "What evil angel stopped at the door of your smile?"
+        },
+        {
+          "text": "Con la espada en la mano ?",
+          "gloss": "ADP:con ART:el-F-SG N:espada-F-SG ADP:en ART:el-F-SG N:mano-F-SG PUNCT:?",
+          "translation": "With the sword in hand?"
+        },
+        {
+          "text": "\u00bf Qui\u00e9n sembr\u00f3 la angustia en las llanuras de tus ojos como el adorno de un dios ?",
+          "gloss": "PUNCT:\u00bf PRON:qui\u00e9n-SG V:sembrar-IND.PST.3SG ART:el-F-SG N:angustia-F-SG ADP:en ART:el-F-PL N:llanura-F-PL ADP:de POSS:2SG-PL N:ojo-M-PL SCONJ:como ART:el-M-SG N:adorno-M-SG ADP:de ART:uno-M-SG N:dios-M-SG PUNCT:?",
+          "translation": "Who sowed the anxiety in the plains of your eyes like an ornament for a god?"
+        },
+        {
+          "text": "\u00bf Por qu\u00e9 un d\u00eda de repente sentiste el terror de ser ?",
+          "gloss": "PUNCT:\u00bf ADP:por PRON:qu\u00e9-SG ART:uno-M-SG N:d\u00eda-M-SG ADP:de N:repente V:sentir-IND.PST.2SG ART:el-M-SG N:terror-M-SG ADP:de FLEX:ser PUNCT:?",
+          "translation": "Why suddenly feel the terror of being?"
+        },
+        {
+          "text": "Y esa voz que te grit\u00f3 vives y no te ves vivir",
+          "gloss": "CCONJ:y DEM:ese-F-SG N:voz-F-SG PRON:que PRON:2SG V:gritar-IND.PST.3SG V:vivir-IND.PRS.2SG CCONJ:y ADV:no PRON:2SG V:ver-IND.PRS.2SG V:vivir",
+          "translation": "That voice that shouted 'live and don't live'"
+        },
+        {
+          "text": "\u00bf Qui\u00e9n hizo converger tus pensamientos al cruce de todos los vientos del dolor ?",
+          "gloss": "PUNCT:\u00bf PRON:qui\u00e9n-SG V:hacer-IND.PST.3SG V:converger POSS:2SG-PL N:pensamiento-M-PL ADP:a ART:el-M-SG N:cruce-M-SG ADP:de DET:todo-M-PL ART:el-M-PL N:viento-M-PL ADP:de ART:el-M-SG N:dolor-M-SG PUNCT:?",
+          "translation": "Who turned your thoughts into a crossroads of all the winds of pain?"
+        },
+        {
+          "text": "Se rompi\u00f3 el diamante de tus sue\u00f1os en un mar de estupor",
+          "gloss": "PRON:3 V:romper-IND.PST.3SG ART:el-M-SG N:diamante-M-SG ADP:de POSS:2SG-PL N:sue\u00f1o-M-PL ADP:en ART:uno-M-SG N:mar-SG ADP:de N:estupor-M-SG",
+          "translation": "Your dream diamond shattered in a sea of confusion"
+        },
+        {
+          "text": "Est\u00e1s perdido Altazor",
+          "gloss": "FLEX:estar-IND.PRS.2SG VERB:perder-M-SG PROPN:Altazor",
+          "translation": "You are lost, Altazor."
+        },
+        {
+          "text": "Solo en medio del universo",
+          "gloss": "ADJ:solo-M-SG ADP:en N:medio ADP:de ART:el-M-SG N:universo-M-SG",
+          "translation": "Only in the middle of the universe"
+        },
+        {
+          "text": "Solo como una nota que florece en las alturas del vac\u00edo",
+          "gloss": "ADJ:solo-M-SG SCONJ:como ART:uno-F-SG N:nota-F-SG PRON:que V:florecer-IND.PRS.3SG ADP:en ART:el-F-PL N:altura-F-PL ADP:de ART:el-M-SG N:vac\u00edo-M-SG",
+          "translation": "Like a note that blooms in the heights of emptiness"
+        },
+        {
+          "text": "No hay bien no hay mal ni verdad ni orden ni belleza",
+          "gloss": "ADV:no FLEX:haber-IND.PRS.3SG N:bien-M-SG ADV:no FLEX:haber-IND.PRS.3SG N:mal-M-SG CCONJ:ni N:verdad-F-SG CCONJ:ni N:orden-M-SG CCONJ:ni N:belleza-F-SG",
+          "translation": "There is no good or bad, neither truth nor order nor beauty."
+        },
+        {
+          "text": "\u00bf En d\u00f3nde est\u00e1s Altazor ?",
+          "gloss": "PUNCT:\u00bf ADP:en PRON:d\u00f3nde V:estar-IND.PRS.2SG PROPN:Altazor PUNCT:?",
+          "translation": "Where are you, Altazor?"
+        }
+      ]
+    }
+  ]
+}

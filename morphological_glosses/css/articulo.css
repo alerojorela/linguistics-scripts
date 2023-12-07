@@ -1,0 +1,412 @@
+:root {
+    --color-foreground: black;
+	--color-background: white;
+	
+	--color-highlight: purple;
+	--color-heading: purple;
+
+	--color-hover: rgb(151, 0, 151);
+}
+
+
+.tabbed {
+  margin: auto 2em;
+  padding-left: 10px;
+}
+div.tabbed, blockquote {
+	border-left: 1px dotted var(--color-highlight);
+	padding-left: 10px;
+  }
+blockquote {
+	/* font-style: italic; */
+	color: #392539;
+}
+
+/* */
+.centered {
+	display: table;
+	margin: 0 auto; /* horizontally centered */
+}
+.centeredtext {
+	text-align: center;
+}
+
+/* class image not figure */
+.viewportadjusted {
+	max-width: 100%;
+	max-height: 100vh;
+}
+
+strong {
+	font-style: bold;
+	font-style: italic;
+}
+
+
+code, .sampleheading {
+	color: var(--color-highlight);
+	padding: 0 3px;
+	font-size: 120%;
+}
+span.foreign {}
+.sampleheading {
+	width: auto;
+	background-color: #eee;
+	border-radius: 15px;
+	color: red;
+	padding: 10px 10px;
+	font-size: 130%;
+}
+.sampleheading img {
+max-height: 2em;
+}
+
+
+
+
+
+body {
+	width: 95%;
+    margin: 0 auto; /* center */
+	
+	font-family: 'Century Gothic', 'Arial Narrow';
+
+	/*
+	Patr�n background:url generado con:
+	http://www.patternify.com/
+	https://codecondo.com/11-background-css-pattern-generators/
+	*/
+	background:url(
+		data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAFElEQVQImWNgIATu3bv3H78AUQAAtv8HM7euFB8AAAAASUVORK5CYII=
+	) repeat;
+		
+}
+
+
+@media (min-width: 1000px) {
+	body {
+		width: 60%;
+		margin: 0 auto; /* para centrarlo */
+	}
+}
+
+
+main {
+	padding: 15px;
+
+	background-color: var(--color-background); /* color distinto del de la p�gina  */
+	color: var(--color-foreground);
+
+	text-align: justify;
+}
+
+
+/******************************
+		 .TableOfContents 
+*******************************/
+/* example: ./writing/numerals/numerales.html */
+
+.TableOfContents {
+	/*
+	position: fixed;
+	top: 0;
+	left: 0;
+	*/
+	margin:0;
+	padding-bottom: 7px;
+	border-top: 5px solid purple;
+	background-color: white;
+
+	position: fixed;
+	width: 95%;
+}
+@media (min-width: 1000px) {
+	.TableOfContents {
+		width: 60%;
+	}
+}
+/*
+Icons by svgrepo.com
+*/
+
+
+.TableOfContents {
+	/* (100 - 60%) / 2*/
+	/* width: 20%; */
+}
+
+.TableOfContents summary{
+	cursor: pointer;
+}
+
+
+.TableOfContents details{
+	color: purple;
+}
+.TableOfContents  ul{
+	padding:3px 10px;
+	margin:0;
+}
+.TableOfContents  li{
+	list-style: none;
+	color:#666;
+	font-size: 90%;
+}
+.TableOfContents  li:before{
+	content: '·';
+}
+.TableOfContents  a{
+	text-decoration: none;
+	color: black;
+}
+.TableOfContents  a:hover{
+	text-decoration: none;
+	color: white;
+	background-color: purple;
+}
+
+
+/******************************
+			 HEADERS 
+*******************************/
+
+header {
+	text-align: right;
+}
+footer {
+	text-align: center;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Segoe Print', 'Trajan Pro', 'Calibri',  /* para Windows */
+				 'Chilanka', 'Purisa'; /* para Ubuntu */
+	color: var(--color-heading);
+}
+h2, h3, h4, h5, h6 {
+	margin-top: 30px;
+}
+h1+h2, h2+h3, h3+h4, h4+h5, h5+h6 {
+	margin-top: 0;
+}
+
+h1, h2 {
+	text-transform: uppercase;
+}
+h1:hover, h2:hover {
+	color: var(--color-hover);
+	transition: all ease-out 1s;
+}
+h1:not( :hover ), h2:not( :hover ){
+	transition: all ease-out 1s;
+}
+
+
+
+
+
+
+/******************************
+			 other 
+*******************************/
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+} 
+
+
+ul {
+	list-style-type:square;
+}
+
+main p {
+	text-indent:10px;
+}
+
+
+
+/******************************
+			 img 
+*******************************/
+/*
+table img {
+	max-height: 1em;
+}
+*/
+img {
+	max-width: 100%;
+}
+/* inline images */
+/* adjust height to font-size, change font-size instead */
+.char img {
+	height: 1em;
+	max-height: 1em;
+}
+
+/******************************
+			 TABLE 
+*******************************/
+figure table {
+	margin: 0 auto;
+}
+
+
+
+table {
+	border-collapse:collapse;
+	text-align: left; /* declare after figure for override */
+}
+th {
+	color: var(--color-highlight);
+}
+thead th {
+	border-bottom: 1px dotted #392539;
+}
+th, td {
+	padding:1px 3px;
+	height: 1.5em;
+}
+tr:hover {
+	color: var(--color-hover);
+}
+
+/* centra si se extiende por varias columnas*/
+th[colspan], td[colspan]{
+	text-align: center;
+}
+
+/* Nassi–Shneiderman diagram
+https://en.wikipedia.org/wiki/Nassi%E2%80%93Shneiderman_diagram
+*/
+table.nsd  {
+	margin: 30px auto;
+
+	text-align: center;
+
+}
+table.nsd th {
+
+}
+table.nsd *.if {
+	background-color: var(--color-highlight);
+	color: white;
+}
+table.nsd *.true {
+	color: green;
+	border-bottom: 1px solid var(--color-highlight);
+}
+table.nsd *.false {
+	color: red;
+	border-bottom: 1px solid var(--color-highlight);
+}
+
+
+/******************************
+			TOOLTIP 
+*******************************/
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+
+	}
+
+	.tooltip .tooltiptext {
+	visibility: hidden;
+
+	background-color: #555;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px 0;
+	text-align: center;
+
+
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	/* IMPORTANTE PARA CENTRAR */
+	width: 300px;
+	margin-left: -150px;
+
+	opacity: 0;
+	transition: opacity 0.3s;
+	}
+
+	.tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+	}
+
+	.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+	}
+
+
+/******************************
+			DUDOSO 
+*******************************/
+/*
+Para textos hechos con imágenes en vez de con tipos de letra estándar.
+*/
+textarea {
+	min-width: 100%;
+}
+.textimgmix {
+	padding: 20px;
+}
+.textimgmix span.space {
+	margin: 0 10px;
+}
+.textimgmix img {
+	max-height: 2em;
+	display: inline;
+}
+
+button {
+	height: 50px;
+	width: 70px;
+
+	background-color: #ddd;
+	border: none;
+
+	text-decoration: none;
+
+	cursor: pointer;
+}
+
+
+p.autor {
+	font-size: 70%;
+	font-style: italic;
+}
+div.links {
+	font-size: 80%;
+}
+
+
+
+/***************************
+****************************
+		license
+****************************
+***************************/  
+.license {
+	margin-bottom: 10px;
+}
+/* 🔙⏎
+.license>div:nth-child(2)::before {
+	content: '⏎'
+	
+}
+/*

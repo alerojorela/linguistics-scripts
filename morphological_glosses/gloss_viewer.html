@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alejandro Rojo">
+    <title>Gloss viewer</title>
+
+    <!-- styles -->
+
+    <!-- My styles -->
+        <!--  
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    -->
+    <link rel="stylesheet" type="text/css" href="css/articulo.css" />
+    <link rel="stylesheet" type="text/css" href="css/linguistic_gloss.css" />
+
+    <!-- scripts -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!-- My scripts -->
+
+    <script src="js/common.js"></script>
+
+    <style>
+        #grammar_input {
+            height: 200px;
+        }
+
+        td.fixed {
+            color: brown !important;
+            text-decoration: underline;
+            font-weight: 600;
+            font-size: larger;
+        }
+
+        div.multipleTables {
+            display: flex;
+            flex-flow: wrap row;
+            justify-content: center;
+        }
+
+        div.multipleTables table {
+            margin: 30px 30px;
+        }
+
+        td,
+        td {
+            height: unset;
+            border: unset;
+        }
+
+        table.predicate td,
+        table.predicate th {
+            padding: 0 10px;
+        }
+
+        table.predicate th {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <main>
+        <h1>Gloss viewer <a
+            href='https://github.com/alerojorela/NLP-scripts/blob/main/semantics/probabilistic/relevant_terms_extraction.py'><img class="inline"
+                src="../../img/pinned-octocat.svg"></a></h1>
+        <p>This spanish glosses have been created automatically using a <a
+                href='https://github.com/alerojorela/NLP-scripts/tree/main/API'>python program</a>:</p>
+        <ul>
+            <li><a href='https://spacy.io/'>Spacy</a> provides the morphology</li>
+            <li>A large language model called <a href='https://huggingface.co/meta-llama/Llama-2-7b-chat-hf'>Llama 2</a>
+                provides the automatic translation from spanish to english.
+        </ul>
+        <p>This webpage (javascript) renders the resultant json file into tables, aligning words into columns.</p>
+
+        <hr>
+        <div>
+            <div>
+                <label for="docsInput">Documents</label>
+                <input type="file" id="docsInput" accept=".json">
+                <span><a href="./samples/altazor.json">Sample document</a></span>
+            </div>
+        </div>
+        <div id="insertion"></div>
+
+    </main>
+
+    <footer>
+        <div class="license">
+            <div>
+                <a href="https://creativecommons.org/licenses/by-nc/2.0/">
+                    <img class="invert" src="../../img/license_CC.png" />
+                    <img class="invert" src="../../img/license_Attribution.png" />
+                    <img class="invert" src="../../img/license_NonCommercial.png" />
+                </a>
+                <span>2023-12<a href="../../aboutme.html">Alejandro Rojo</a></span>
+            </div>
+            <div>
+                <a href="../../index.html" title="Title">Return to main page</a>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script>
+        var text_data = undefined;
+
+        function parseTexts(docs) {
+            $.each(docs, function (index, doc) {
+                $('#insertion').html(`<h2>${doc.title}</h2>`);
+                // Creates tables, one per line
+                tfd = createTablesFromData(doc.parts, ['text', 'gloss', 'translation']);
+                $('#insertion').append(tfd);
+                // Divides words into columns (excluding translation) to correlate information
+                createLinguisticGlosses();
+            });
+        }
+
+        window.onload = function () {
+            function loadDocs(url) {
+                // Load text samples
+                data = loadJSON(url);
+                if (data) {
+                    text_data = data;
+                    console.log('Texts loaded:', text_data);
+                } else {
+                    console.error("Error loading texts");
+                }
+            }
+
+            loadDocs("./samples/altazor.json")
+            parseTexts(text_data.docs);
+
+            $('#docsInput').change(function () {
+                // Gets filename
+                let url = $(this).val().split('\\').pop();
+                console.log('Archivo seleccionado:', $(this).val());
+                console.log('Archivo seleccionado:', url);
+                loadDocs(url);
+                parseTexts(text_data.docs);
+            });
+
+        };
+    </script>
+
+    <!-- ANALYSIS parser for glosses ":.- " -->
+    <script src="js/gloss_parser.js"></script>
+
+    <!-- GLOSSES RENDERING -->
+    <script src="js/linguisticGlosses.js"></script>
+
+
+</body>
+
+</html>
