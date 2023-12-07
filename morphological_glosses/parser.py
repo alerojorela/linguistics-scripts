@@ -378,21 +378,8 @@ if __name__ == '__main__':
 
     sys.exit(0)
     # text = input('Introduce texto y pulsa <intro>\n')
-    text_altazor = """Altazor ¿por qué perdiste tu primera serenidad?
-    ¿Qué ángel malo se paró en la puerta de tu sonrisa
-    Con la espada en la mano?
-    ¿Quién sembró la angustia en las llanuras de tus ojos como el adorno de un dios?
-    ¿Por qué un día de repente sentiste el terror de ser?
-    Y esa voz que te gritó vives y no te ves vivir
-    ¿Quién hizo converger tus pensamientos al cruce de todos los vientos del dolor?
-    Se rompió el diamante de tus sueños en un mar de estupor
-    Estás perdido Altazor
-    Solo en medio del universo
-    Solo como una nota que florece en las alturas del vacío
-    No hay bien no hay mal ni verdad ni orden ni belleza
-    ¿En dónde estás Altazor?"""
 
-    text2 = """
+    text = """
     la casa construida en el prado
     yo lo he visto
     fue vista con su pareja
@@ -420,18 +407,6 @@ if __name__ == '__main__':
     un coche
     """
 
-    text = text_altazor
-    # text = determinantes
-
-    title = "Altazor I"
     sections = parse(text)
-    document = {
-    "docs": [
-        {"title": title, "parts": sections}
-    ]
-    }
-    print(json.dumps(document, indent=2))
-    # return document
-    with open('output.json', 'w') as f:
-        f.write(json.dumps(document, indent=2))
+    print(json.dumps(sections, indent=2))
 
