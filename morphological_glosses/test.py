@@ -2,7 +2,7 @@ import sys
 import json
 import parser
 
-with open('/mnt/archivos/Lingüística/MI-sitio-web/conlang_whimsy/caprichos/test.json') as f:
+with open('test.json') as f:
     test_data = json.load(f)
 
 # print(json.dumps(test_data, indent=1))
