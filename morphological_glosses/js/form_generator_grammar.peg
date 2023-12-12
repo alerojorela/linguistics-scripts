@@ -1,0 +1,85 @@
+/******************************
+window.generator_parser
+
+START =
+7 C V
+1 V
+
+C =
+1 "n" 
+3 "l"
+
+V = 12 "a" 14 "e" 4 "u" 6 "i" 9 "o"
+
+
+CONCATENACIÓN VS. ALTERNATIVAS
+1 V 1 N 1 "S"   (1 V) (1 N) (1 "S")
+1 V N 1 "S"		(1 V N) 1 "S"
+
+TAREAS
+	IMPLEMENTAR BIEN ESPACIOS, COMENTARIOS
+	¿PARÉNTESIS? QUIZÁ NO
+
+	¿CUANTIFICADORES?
+    al ser esta una gramática par ala generación de lenguaje natural
+    +* no se admiten
+        {1,1}
+    ? = {0,1}
+        {0,3}
+
+EN EL POST-PROCESO
+ERROR si dos partes izquierda de las reglas iguales o fúndelas
+MODIFICAR DICCIONARIO, hacer que partes izquierda sea KEY
+ya que esta gramática no lo permite
+******************************/
+
+Start =
+____?
+r:((Commentary [\n]*)*  r:Rule [\n]* (Commentary [\n]*)* { return r; })+
+____?
+{ return r; }
+
+Commentary = "//" [^\n\r]+
+// [ \t\S]* [\n\r]
+
+Rule = nt:NonTerm _ "=" a:String+
+{ var prueba = nt; return { rule_name: nt, alternatives: a }; }
+// { const key = nt; return { key: a }; }
+
+// IMPLEMENTAR BIEN ESPACIOS, COMENTARIOS
+Alternatives = __ s:String+
+{ return { jajaj: s }; }
+
+// frequency: n
+String = __ n:integer " " s:Symbol+ __
+{ return { "frequency": n, string: s }; }
+
+Symbol = 
+_ nt:NonTerm { return {"nonTerm": nt}; }
+/
+_ t:Term { return {"Term": t}; }
+
+
+// Everything except " and new lines
+Term =
+"'" c:[^\n\r"']+ "'" { return c.join(""); }
+/
+'"' c:[^\n\r"']+ '"' { return c.join(""); }
+
+
+// A number can't start an identifier
+NonTerm = c:([^ \t\n\r\(\)\/"'0-9][^ \t\n\r\(\)\/"']*)
+{ return text().toUpperCase(); } // CASE UNSENSITIVE
+// OLD
+// NonTerm = c:[^ \t\n\r\(\)"'0-9\/]+ { return c.join("").toUpperCase(); } // CASE UNSENSITIVE
+
+
+integer = [0-9]+
+{ return parseInt(text(), 10); }
+
+// optional space without newlines
+_ = [ \t]*
+// optional space with one newline allowed
+__ = _ [\r\n]? _
+// optional space
+____ = [ \t\n\r]+

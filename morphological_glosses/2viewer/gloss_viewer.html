@@ -9,18 +9,15 @@
     <!-- styles -->
 
     <!-- My styles -->
-        <!--  
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    -->
-    <link rel="stylesheet" type="text/css" href="css/articulo.css" />
-    <link rel="stylesheet" type="text/css" href="css/linguistic_gloss.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/articulo.css" />
+    <link rel="stylesheet" type="text/css" href="../css/linguistic_gloss.css" />
 
     <!-- scripts -->
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
 
     <!-- My scripts -->
-
-    <script src="js/common.js"></script>
+    <script src="../js/common.js"></script>
 
     <style>
         #grammar_input {
@@ -65,10 +62,11 @@
 <body>
     <main>
         <h1>Gloss viewer <a
-            href='https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses'><img class="inline"
-                src="../../img/pinned-octocat.svg"></a></h1>
+                href='https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses'><img
+                    class="inline" src="../../img/pinned-octocat.svg"></a></h1>
         <p>This spanish glosses have been created automatically using a <a
-                href='https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses'>python program</a>:</p>
+                href='https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses'>python
+                program</a>:</p>
         <ul>
             <li><a href='https://spacy.io/'>Spacy</a> provides the morphology</li>
             <li>A large language model called <a href='https://huggingface.co/meta-llama/Llama-2-7b-chat-hf'>Llama 2</a>
@@ -81,7 +79,7 @@
             <div>
                 <label for="docsInput">Documents</label>
                 <input type="file" id="docsInput" accept=".json">
-                <span><a href="./samples/altazor.json">Sample document</a></span>
+                <span><a href="../samples/altazor.json">Sample document</a></span>
             </div>
         </div>
         <div id="insertion"></div>
@@ -107,52 +105,40 @@
 
 
     <script>
-        var text_data = undefined;
-
-        function parseTexts(docs) {
-            $('#insertion').html();
+        function parseTexts(docs, insertionElement, headingLevel = 2) {
+            // empty
+            $insertionElement.html('');
             $.each(docs, function (index, doc) {
-                $('#insertion').append(`<h2>${doc.title}</h2>`);
+                $insertionElement.append(`<h${headingLevel}>${doc.title}</h${headingLevel}>`);
                 // Creates tables, one per line
-                tfd = createTablesFromData(doc.parts, ['text', 'gloss', 'translation']);
-                $('#insertion').append(tfd);
+                tableHTML = createTablesFromData(doc.parts, ['text', 'gloss', 'translation']);
+                $insertionElement.append(tableHTML);
                 // Divides words into columns (excluding translation) to correlate information
-                createLinguisticGlosses();
+                splitTableIntoColumns();
             });
         }
 
         window.onload = function () {
-            function loadDocs(url) {
-                // Load text samples
-                data = loadJSON(url);
-                if (data) {
-                    text_data = data;
-                    console.log('Texts loaded:', text_data);
-                } else {
-                    console.error("Error loading texts");
-                }
+            $insertionElement = $('#insertion')
+
+            // default sample file
+            url = "../samples/altazor.json";
+            raw_data = loadPlainFile(url);
+            doc_data = parseJSON(raw_data);
+            parseTexts(doc_data.docs, $insertionElement);
+
+            // on demand file
+            function callback(raw_data) {
+                let jsonObject = parseJSON(raw_data);
+                parseTexts(jsonObject.docs, $insertionElement);
             }
-
-            loadDocs("./samples/altazor.json")
-            parseTexts(text_data.docs);
-
-            $('#docsInput').change(function () {
-                // Gets filename
-                let url = $(this).val().split('\\').pop();
-                console.log('Archivo seleccionado:', $(this).val());
-                console.log('Archivo seleccionado:', url);
-                loadDocs(url);
-                parseTexts(text_data.docs);
-            });
-
+            // $('#docsInput').change(readInputFile);
+            $('#docsInput').change((e) => { readInputFile(e, callback) });
         };
     </script>
 
-    <!-- ANALYSIS parser for glosses ":.- " -->
-    <script src="js/gloss_parser.js"></script>
-
     <!-- GLOSSES RENDERING -->
-    <script src="js/linguisticGlosses.js"></script>
+    <script src="../js/linguisticGlosses.js"></script>
 
 
 </body>

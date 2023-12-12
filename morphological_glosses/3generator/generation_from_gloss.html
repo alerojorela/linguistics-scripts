@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alejandro Rojo">
+    <title>Linguistic forms generation from glosses</title>
+
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/schemes/red-dark.css"> -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/schemes/darcula.css">
+    <!-- styles -->
+
+    <link rel="stylesheet" type="text/css" href="../css/linguistic_gloss.css" />
+
+    <!-- scripts -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+
+    <!-- My scripts -->
+    <script src="../js/common.js"></script>
+
+    <style>
+        #grammar_input {
+            width: 100vw;
+
+
+            /*
+            min-height: 200px;
+            height: 200px;
+            max-height: 200px;
+            overflow-y: scroll;
+
+            */
+
+        }
+
+        span:not(.hyphen).fixed {
+            text-decoration: underline;
+            font-weight: 600;
+            /* font-variant: small-caps; */
+            /*
+            font-size: larger;
+            background-color: rgb(80, 52, 42);
+            */
+            background-color: rgb(209, 206, 24) !important;
+            color: black;
+        }
+
+        tr.gloss>td>span:hover {
+            background-color: rgb(192, 109, 14);
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <aside>
+        <div data-role="appbar" data-expand-point="md">
+            <ul class="app-bar-menu">
+                <li>
+                    <a href="#" class="dropdown-toggle">Documents</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a id="docsLoad" href="#">Load</a></li>
+                        <li><a id="docsDownload" href="#">Download</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">Grammar</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a id="grammarLoad" href="#">Load</a></li>
+                        <li><a id="grammarDownload" href="#">Download</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">Vocabulary</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a id="vocabularyLoad" href="#">Load</a></li>
+                        <li><a id="SelectedVocabularyDownload" href="#">Download selected vocabulary</a></li>
+                        <li><a id="vocabularyDownload" href="#">Download vocabulary</a></li>
+
+                        <li class="divider bg-lightGray"></li>
+                        <li><a id="resetNonSelectedVocabulary" href="#" data-hotkey="Ctrl+F2">Reset non selected
+                                vocabulary</a></li>
+                        <li><a id="resetVocabulary" href="#">Reset vocabulary</a></li>
+                        <!-- -->
+                    </ul>
+                </li>
+            </ul>
+
+
+        </div>
+    </aside>
+
+    <main>
+        <!-- 
+Generación de formas lingüísticas en base a reglas
+Esta es una herramienta para la construcción de lenguas artificiales a partir de glosas (conlanging, de la actividad de crear lenguas, constructed languages)
+
+Puedes generar las glosas de un texto a través de este programa de Python.
+Para visualizarlas puedes utilizar esta utilidad o esta página.
+Esta página te permite generar las formas correspondientes a las glosas de un documento en base a la definición de una gramática. Para seleccionar y fijar el vocabulario clica con el botón izquierdo del ratón en una glosa; para generar otra forma alternativa clica el botón derecho.
+
+Puedes manipular los documentos, la gramática y el vocabulario siguiendo los formatos previstos (descarga los archivos de ejemplo como guía).
+
+
+Rule-based generation of linguistic forms
+
+This is a tool for constructing artificial languages from glosses (conlanging, from the activity of creating languages, constructed languages).
+
+You can generate the glosses of a text through this Python program.
+To visualize them you can use this utility or this page.
+This page allows you to generate the forms corresponding to the glosses of a document based on the definition of a grammar. To select and set the vocabulary, left-click on a gloss; to generate an alternative form, right-click.
+
+You can manipulate the documents, grammar and vocabulary by following the provided formats (download the sample files as a guide).
+
+
+Translated with DeepL.com (free version)
+            <ul>
+                <li>left: promotes word for vocabulary saving, additionally protects from word generation</li>
+                <li>right: generates another word</li>
+            </ul>
+         -->
+        <div class="p-2">
+            <br>
+            <br>
+
+            <h2>Rule-based generation of linguistic forms</h2>
+
+            <p>This is a tool for constructing artificial languages from glosses (conlanging, from the activity of
+                creating languages, constructed languages).
+            </p>
+
+            <ol>
+                <li>You can generate the glosses of a text through <a
+                        href="https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses/1glosser">this
+                        Python program</a>.</li>
+                <li>To visualize them you can use <a href="../2viewer/gloss_viewer.html">this utility</a>
+                    or this page.</li>
+                <li>This page allows you to generate the forms corresponding to the glosses of a document based on the
+                    definition of a grammar.
+                    <ul>
+                        <li>To select and lock the vocabulary, left-click on a gloss</li>
+                        <li>to generate an alternative form, right-click over an unlocked gloss.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p>You can manipulate the documents, grammar and vocabulary by following the provided formats (download the
+                sample files as a guide).
+            </p>
+
+
+            <!--  SPANISH
+            <h2>Generación de formas lingüísticas en base a reglas</h2>
+
+            <p>Esta es una herramienta para la construcción de lenguas artificiales a partir de glosas (conlanging, de
+                la actividad de crear lenguas, constructed languages)</p>
+
+            <ol>
+                <li>Puedes generar las glosas de un texto a través de <a href="https://github.com/alerojorela/linguistics-scripts/tree/main/morphological_glosses/1glosser">este programa</a> de Python.</li>
+                <li>Para visualizarlas puedes utilizar <a href="../glosses/gloss_viewer.html">esta utilidad</a> o esta página.</li>
+                <li>Esta página te permite generar las formas correspondientes a las glosas de un documento en base a la
+                    definición de una gramática.
+                    <ul>
+                        <li>Para seleccionar y fijar el vocabulario clica con el botón izquierdo
+                            del ratón en una glosa</li>
+                        <li>para generar otra forma alternativa clica el botón derecho.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p>Puedes manipular los documentos, la gramática y el vocabulario siguiendo los formatos previstos (descarga
+                los archivos de ejemplo como guía).</p>
+            -->
+        </div>
+
+        <div data-role="accordion">
+            <div class="frame ">
+                <div class="heading">Morpheme grammar</div>
+                <div class="content" style="display: none;">
+                    <textarea id="grammar_input" onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
+                </div>
+            </div>
+            <div class="frame active">
+                <div class="heading">Documents</div>
+                <div class="content" style="display: block;">
+                    <label class="checkbox transition-on">
+                        <input id="showHyphens" type="checkbox" data-role="checkbox" data-caption="Checkbox"
+                            checked="checked" data-role-checkbox="true" class=""><span class="check"></span><span
+                            class="caption">Show text hyphens</span>
+                    </label>
+                    <label class="checkbox transition-on">
+                        <input id="showNullMorphs" type="checkbox" data-role="checkbox" data-caption="Checkbox"
+                            checked="checked" data-role-checkbox="true" class=""><span class="check"></span><span
+                            class="caption">Show null morphs</span>
+                    </label>
+
+
+                    <div id="insertion"></div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div style="display:none;">
+        <!-- LOADING -->
+        <input type="file" id="docsInput" accept=".json">
+        <input type="file" id="grammarInput" accept=".*">
+        <input type="file" id="vocabularyInput" accept=".tsv;.csv">
+    </div>
+
+    <!-- 
+    <footer>
+        <div class="license">
+            <div>
+                <a href="https://creativecommons.org/licenses/by-nc/2.0/">
+                    <img class="invert" src="../../img/license_CC.png" />
+                    <img class="invert" src="../../img/license_Attribution.png" />
+                    <img class="invert" src="../../img/license_NonCommercial.png" />
+                </a>
+                <span>2023-6 2023-11<a href="../../aboutme.html">Alejandro Rojo</a></span>
+            </div>
+            <div>
+                <a href="../../index.html" title="Title">Return to main page</a>
+            </div>
+        </div>
+    </footer>
+ -->
+    <script>
+        window.onbeforeunload = function () {
+            return 'Are you sure you want to leave?';
+        };
+
+        window.onload = function () {
+            $insertion = $('#insertion');
+
+            /****************************************
+             * LOAD SAMPLES
+             ***************************************/
+            // Load selected vocabulary
+            url = "../samples/vocabulary.tsv";
+            raw_data = loadPlainFile(url);
+            if (raw_data) {
+                data = parseCSV(raw_data, separator = '\t');
+                console.log("Vocabulary loaded", data);
+                loadVocabulary(data);
+            } else {
+                console.error("Error loading vocabulary");
+            }
+
+            // Load grammar samples
+            url = "../samples/grammar.txt"
+            grammar_data = loadPlainFile(url);
+            if (grammar_data) {
+                loadGrammar(grammar_data);
+                console.log("Grammar loaded", fg);
+            } else {
+                console.error("Error loading grammar");
+            }
+            // display grammar
+            $('#grammar_input').val(grammar_data);
+
+            // Load documents samples
+            // loadDocs("../glosses/samples/altazor.json")
+            url = "../samples/altazor.json";
+            raw_data = loadPlainFile(url);
+            doc_data = parseJSON(raw_data);
+            // local function that requires loaded grammar
+            CreateTablesFromObject(doc_data.docs, $insertion);
+
+
+            $('#showHyphens').change(function () {
+                let state = $(this).prop("checked");
+                if (state) {
+                    $("tr.text span.hyphen").show();
+                } else {
+                    $("tr.text span.hyphen").removeAttr("style").hide();
+                }
+            });
+            $('#showNullMorphs').change(function () {
+                let state = $(this).prop("checked");
+                if (state) {
+                    $("tr.text span.nullMorph").show();
+                    // $("tr.text span.nullMorph").css('display', 'inline');
+                } else {
+                    $("tr.text span.nullMorph").removeAttr("style").hide();
+                    // $("tr.text span.nullMorph").css('display', 'none');
+                }
+            });
+
+
+            // GUI LOADS
+            $('#docsLoad').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                $("#docsInput").click();
+            });
+            $('#grammarLoad').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                $("#grammarInput").click();
+            });
+            $('#vocabularyLoad').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                $("#vocabularyInput").click();
+            });
+
+            $('#docsInput').change(function (e) {
+                readInputFile(e, function (raw_data) {
+                    doc_data = parseJSON(raw_data);
+                    CreateTablesFromObject(doc_data.docs, $insertion);
+                });
+            });
+            $('#grammarInput').change(function (e) {
+                readInputFile(e, function (data) {
+                    grammar_data = data;
+                    loadGrammar(grammar_data);
+                    $("#grammar_input").val(grammar_data);
+                    update();
+                });
+            });
+            $('#vocabularyInput').change(function (e) {
+                readInputFile(e, function (raw_data) {
+                    data = parseCSV(raw_data);
+                    loadVocabulary(data);
+                    update();
+                });
+            });
+
+            // GUI DOWNLOADS
+            $('#docsDownload').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                filename = 'newdocument.json';
+                raw_data = JSON.stringify(doc_data);
+                DownloadFile(raw_data, filename, type = "text/plain");
+            });
+            $('#grammarDownload').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                filename = 'newdocument.grammar.txt';
+                raw_data = $("#grammar_input").val();
+                DownloadFile(raw_data, filename, type = "text/plain");
+            });
+
+            $('#SelectedVocabularyDownload').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                filename = 'newdocument.vocabulary.csv';
+                raw_data = saveVocabulary(selected = true);
+                DownloadFile(raw_data, filename, type = "text/plain");
+            });
+            $('#vocabularyDownload').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                filename = 'newdocument.vocabulary.csv';
+                raw_data = saveVocabulary();
+                DownloadFile(raw_data, filename, type = "text/plain");
+            });
+
+
+
+            $(window).bind('keydown', function (e) {
+                // 112 F1, 113 F2
+                var keyCode = e.keyCode || e.which;
+                // F1 key code, but NOT with SHIFT/CTRL/ALT
+                // if ((keyCode == 112 || e.key == 'F1') && !event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
+                if ((keyCode == 113 || e.key == 'F2') && !event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey) {
+                    // prevent code starts here:
+                    resetNonSelectedVocabulary();
+                    e.cancelable = true;
+                    e.stopPropagation();
+                    e.preventDefault();
+                    e.returnValue = false;
+                }
+            });
+            $('#resetNonSelectedVocabulary').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                resetNonSelectedVocabulary();
+            });
+            $('#resetVocabulary').click(function (event) {
+                // event.preventDefault();  // Abort default behaviour
+                if (window.confirm("Do you really want to reset candidate/protected vocabulary forms?")) {
+                    cat2form2translation = {};
+                    target_forms.clear();
+                    update();
+                }
+            });
+
+            // textAreaAdjust($('#grammar_input'));
+            textAreaAdjust(document.getElementById('grammar_input'));
+            // onkeyup_textarea_vertical_fit($('#grammar_input'));
+        };
+    </script>
+
+    <!-- 
+    text_generation_from_gloss
+        linguisticGlosses
+        gloss_parser
+        generator
+            generator_parser
+
+     -->
+    <!-- GLOSSES RENDERING -->
+    <script src="../js/linguisticGlosses.js"></script>
+    <!-- ANALYSIS parser for glosses ":.- "  - generated by PEG.js 0.10.0. -->
+    <script src="../js/gloss_parser.js"></script>
+
+    <!-- GENERATION parser - generated by PEG.js 0.10.0. -->
+    <script src="../js/generator_parser.js"></script>
+    <script src="../js/generator.js"></script>
+
+    <!-- MAIN FUNCTIONS -->
+    <script src="../js/generation_from_gloss.js"></script>
+
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+
+</body>
+
+</html>

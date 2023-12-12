@@ -2,16 +2,21 @@
 Creates linguistic glosses
 using tables or other structures
 
-2020 Alejandro Rojo Gualix
+2020- Alejandro Rojo Gualix
+2023-12 updated
 
 Creative Commons license
 CC BY-NC Attribution & Non-commercial
 *************************************************/
 
 /*
-Toma listas de objetos, cada uno con las siguientes propiedades
-Requires a object with properties:
-    text gloss translation
+Dos situaciones:
+1. no tenemos tablas pero tenemos un objeto con atributos que podemos corresponder con filas
+2. tenemos las tablas con filas
+
+Luego crearemos las columnas dividiendo de alguna manera (por palabras-espacios por ejemplo)
+
+Requires an object with properties: text gloss translation
 */
 
 function TableOverflow() {
@@ -31,121 +36,101 @@ function TableOverflow() {
     });
 }
 
-// Converts words to td elements
-function createTd(data) {
-    if (Array.isArray(data)) {
-        // Already divided
-        parts = data
-    } else {
-        parts = data.split(' ')
-    }
-    return '<td>' + parts.join('</td><td>') + '</td>';
-}
 
-
-function createTablesFromData(data, properties_selection=[]) {
-    /* properties object to columns
+function createTablesFromData(data, properties_selection = []) {
+    /* creates rows with one column
+    properties object to columns
     */
-    // console.log(data);
     tbodyList = [];
-    
     jQuery.each(data, function (index, item) {
-        // Itera sobre las propiedades del objeto para crear las celdas del encabezado
         tbodyList.push(`<table class="linguistic_gloss">`)
         // tbodyList.push(`<tbody>`)
         if (properties_selection.length) {
-            $.each(properties_selection, function(index, key) {
+            // just selected properties
+            $.each(properties_selection, function (index, key) {
                 tbodyList.push(`<tr class="${key}"><td>${item[key]}</td></tr>`)
             });
         } else {
-        $.each(item, function(key, value) {
-            tbodyList.push(`<tr class="${key}"><td>${value}</td></tr>`)
-            // $('<th>').text(propiedad).appendTo(encabezadoFila);
-        });
+            // all
+            $.each(item, function (key, value) {
+                tbodyList.push(`<tr class="${key}"><td>${value}</td></tr>`)
+                // $('<th>').text(propiedad).appendTo(encabezadoFila);
+            });
         }
         // tbodyList.push(`</tbody>`)
         tbodyList.push(`</table>`)
     });
     let contents = tbodyList.join('\n');
     return contents
-    return `<table class="linguistic_gloss">${contents}</table>`
 }
 
 
-function createDataFromTables(properties_selection=[]) {
-    // linguistic_gloss not glossed yet
-
-    var result = []
-    // antes de glosarlas not(.glossed), de lo contrario habría que hacer join
-    $('table.linguistic_gloss:not(.glossed)').each(function (i, table) {
-        var text = $(table).find("tr.text td");
-        var gloss = $(table).find("tr.gloss td");
-        var translation = $(table).find("tr.translation td");
-        // get translation row
-        result.push({
-            text: text.text(),
-            gloss: gloss.text(),
-            translation: translation.text()
-        });
+function createDataFromTables() {
+    // each table
+    return jQuery.map($('table.linguistic_gloss.glossed'), table => {
+        // each tr
+        let pairs = jQuery.map($(table).find("tr"), tr => [
+            [$(tr).attr('class'),
+            jQuery.map($(tr).find("td"), obj => [$(obj).text()])
+            // each td as text
+        ]]);
+        var object = Object.assign({}, ...pairs.map(([k, v]) => ({ [k]: v })))
+        return [object]
     });
-
-    return result
 }
 
 
+// Converts words to td elements
+function splitBySpace(data) {
+    return data.split(/\s+/);
+}
 
-function createLinguisticGlosses() {
+function NullCellFormating(data) {
+    return data;
+}
+
+function splitTableIntoColumns(splitFunction = splitBySpace, formatCellFunction = NullCellFormating) {
+    // parte de tablas html, y las divide por columnas
+
     // linguistic_gloss not glossed yet
     $('table.linguistic_gloss:not(.glossed)').each(function (i, table) {
         // get translation row
-        var translation = $(table).find("tr.translation td");
-
+        // TODO exclude classes <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        let translation = $(table).find("tr.translation td");
         // sólo convierte las que tengan un sólo td. Y translation no se divide
-        var divisible_cells = $(table).find("tr:not(.translation) td:only-child");
-        if (divisible_cells.length == 1) return true; // continue to next object because there is no need to correlate data
+        let $divisible_cells = $(table).find("tr:not(.translation) td:only-child");
 
-        // 1:1 divisible_cells - listOfListOfWords
-        var listOfListOfWords = []; // list[list[str]] list of word lists
-        divisible_cells.each(function (i, obj) {
-            // var words = $(obj).text().split(' ');
-            // split by spaces (use . or - for grouping metalanguage glosses) 
-            var words = $(obj).text().split(/\s+/);
-            listOfListOfWords.push(words);
-        });
+        if ($divisible_cells.length == 1) return true; // continue to next object because there is no need to correlate data
 
-        // determina máximo de columnas
+        // console.log($divisible_cells);
+        // avoid flattening with []
+        // https://stackoverflow.com/questions/703355/is-there-a-jquery-map-utility-that-doesnt-automically-flatten        
+        let listOfListOfWords = jQuery.map($divisible_cells, obj => [splitFunction($(obj).text())]);
+
+        // get max columns
         lengths = listOfListOfWords.map(x => x.length);
+        // consensus?
         columns = new Set(lengths);
-        // consensus not reached
-        if (columns.length > 1) {
-            console.error(divisible_cells, "table.linguistic_gloss tr:not(.translation) td:only-child\t have different words count");
-        }
-        // will take max division
-        maxcol = Math.max(...columns);//Array.from(columns));
+        if (columns.length > 1) console.warn($divisible_cells, "row have different word count");
+        // take max columns value
+        maxcol = Math.max(...columns); //Array.from(columns));
         // console.log(table, listOfListOfWords, lengths, columns, maxcol);
 
-        var newHtml = '';
-        const createDivs = false;
-        if (createDivs) {
-            transposedTable = transpose(listOfListOfWords);
-            console.log(table, transposedTable);
-            newHtml = '<tbody><tr><td class="row_gloss">' + transposedTable.map(entry => '<div class="word_gloss"><div>' + entry.join('</div><div>') + '</div></div>').join('') + '</td></tr></tbody>';
-            $(newHtml).prependTo($(table));
-            console.log(newHtml);
-        } else { // <<<<<<<<<<<<<
-            divisible_cells.each(function (i, obj) {
-                newHtml = createTd(listOfListOfWords[i]);
-                // console.log(obj, newHtml);
-                // replace html content
-                $(obj).parent().html(newHtml);
-            });
+        $divisible_cells.each(function (i, obj) {
+            // console.log(materials.map((material) => material.length));
+            let new_w = listOfListOfWords[i].map((cellData) => formatCellFunction(cellData))
+            let newHtml = '<td>' + new_w.join('</td><td>') + '</td>';
+            // fill columns
+            diff = maxcol - listOfListOfWords[i].length;
+            if (diff > 0) newHtml += '<td></td>'.repeat(diff);
+            // replace html content
+            $(obj).parent().html(newHtml);
+        });
 
-            translation.attr('colspan', maxcol);
-        }
+        translation.attr('colspan', maxcol);
 
-
+        // mark as done
         $(table).addClass("glossed");
-
     });
 
     TableOverflow();
